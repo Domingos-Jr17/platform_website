@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.yourwebsite.com/sitemap.xml
+
+# TODO: Adicionar regras específicas para bloquear/permitir o rastreamento de certas páginas ou diretórios, se necessário.
+# Exemplo:
+# Disallow: /admin/
+# Disallow: /private/
