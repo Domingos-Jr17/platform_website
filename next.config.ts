@@ -64,28 +64,28 @@ const nextConfig = {
   },
   webpack: (config: Configuration, { dev, isServer }: { dev: boolean; isServer: boolean }) => {
     // Otimizações para produção
-    
-    // Divida o código em chunks menores
-    if (config.optimization) {
-      config.optimization.splitChunks = {
-        chunks: 'all',
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-            priority: 10,
+    if (!dev) {
+      // Divida o código em chunks menores
+      if (config.optimization) {
+        config.optimization.splitChunks = {
+          chunks: 'all',
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+              priority: 10,
+            },
+            common: {
+              name: 'common',
+              minChunks: 2,
+              chunks: 'all',
+              priority: 5,
+            },
           },
-          common: {
-            name: 'common',
-            minChunks: 2,
-            chunks: 'all',
-            priority: 5,
-          },
-        },
-      };
+        };
+      }
     }
-    
     return config;
   },
 };
