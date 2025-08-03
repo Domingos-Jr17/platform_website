@@ -8,6 +8,7 @@
   --font-geist-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --primary: #003366;
   --accent: #d92d20;
+  --icon-bg-color: #E0F2FE; /* light-blue-100 */
 }
 
 /* Ligação das variáveis CSS com o tema Tailwind */
@@ -22,6 +23,7 @@
 html.dark {
   --background: #0a0a0a;
   --foreground: #ededed;
+  --icon-bg-color: #001a33;
 }
 
 /* Aplicação das variáveis no body */
@@ -49,7 +51,7 @@ body {
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
   }
   .icon-bg {
-    background-color: #E0F2FE; /* light-blue-100 */
+    background-color: var(--icon-bg-color);
     color: var(--primary);
     width: 64px;
     height: 64px;

@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { HelpCircle, FileText, Headphones, Phone, Mail, MessageCircle } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { HelpCircle, FileText, Headphones, Phone, Mail, MessageCircle, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import PageHeader from '@/app/components/ui/PageHeader';
+import CtaSection from '@/app/components/sections/CtaSection';
 
 export default function SuportePage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -36,34 +38,16 @@ export default function SuportePage() {
 
   return (
     <div className="pt-24">
-      {/* Hero Section */}
-      <section className="bg-[var(--primary)] text-white py-16">
-        <div className="container mx-auto px-6 text-center">
-          <motion.h1 
-            className="text-4xl font-bold mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Suporte ao Cliente
-          </motion.h1>
-          <motion.p 
-            className="text-xl max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Estamos aqui para ajudar você em todas as etapas, desde a escolha do seguro até o acompanhamento de sinistros
-          </motion.p>
-        </div>
-      </section>
+      <PageHeader
+        title="Suporte ao Cliente"
+        subtitle="Estamos aqui para ajudar você em todas as etapas, desde a escolha do seguro até o acompanhamento de sinistros"
+      />
 
       {/* Canais de Atendimento */}
-      <section className="py-16">
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.h2 
-            className="text-3xl font-bold text-center mb-12"
-            style={{color: '#003366'}}
+            className="text-3xl font-bold text-center mb-12 text-[var(--primary)]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -74,58 +58,58 @@ export default function SuportePage() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <motion.div 
-              className="bg-white rounded-xl shadow-md p-8 text-center card-hover"
+              className="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md p-8 text-center card-hover"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <div className="icon-bg mx-auto mb-4">
-                <Phone size={24} />
+                <Phone size={24} className="text-[var(--primary)]" />
               </div>
-              <h3 className="text-xl font-bold mb-2">Atendimento Telefônico</h3>
-              <p className="text-gray-600 mb-4">Fale diretamente com nossos especialistas</p>
+              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">Atendimento Telefônico</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">Fale diretamente com nossos especialistas</p>
               <a href="tel:+258877970000" className="text-[var(--primary)] font-medium hover:underline">+258 87 797 0000</a>
-              <p className="text-sm text-gray-500 mt-2">Segunda a Sexta: 8h-18h</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">Segunda a Sexta: 8h-18h</p>
             </motion.div>
             
             <motion.div 
-              className="bg-white rounded-xl shadow-md p-8 text-center card-hover"
+              className="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md p-8 text-center card-hover"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <div className="icon-bg mx-auto mb-4">
-                <Mail size={24} />
+                <Mail size={24} className="text-[var(--primary)]" />
               </div>
-              <h3 className="text-xl font-bold mb-2">E-mail</h3>
-              <p className="text-gray-600 mb-4">Envie suas dúvidas e solicitações</p>
+              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">E-mail</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">Envie suas dúvidas e solicitações</p>
               <a href="mailto:comercial@platformseguros.com" className="text-[var(--primary)] font-medium hover:underline">comercial@platformseguros.com</a>
-              <p className="text-sm text-gray-500 mt-2">Resposta em até 24h</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">Resposta em até 24h</p>
             </motion.div>
             
             <motion.div 
-              className="bg-white rounded-xl shadow-md p-8 text-center card-hover"
+              className="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md p-8 text-center card-hover"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <div className="icon-bg mx-auto mb-4">
-                <MessageCircle size={24} />
+                <MessageCircle size={24} className="text-[var(--primary)]" />
               </div>
-              <h3 className="text-xl font-bold mb-2">Chat Online</h3>
-              <p className="text-gray-600 mb-4">Converse com um atendente em tempo real</p>
+              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">Chat Online</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">Converse com um atendente em tempo real</p>
               <button className="text-[var(--primary)] font-medium hover:underline">Iniciar Chat</button>
-              <p className="text-sm text-gray-500 mt-2">Disponível durante o horário comercial</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">Disponível durante o horário comercial</p>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Acompanhamento de Sinistros */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -134,14 +118,14 @@ export default function SuportePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <h2 className="text-3xl font-bold mb-6" style={{color: '#003366'}}>Acompanhamento de Sinistros</h2>
-              <p className="text-gray-600 mb-4">
+              <h2 className="text-3xl font-bold mb-6 text-[var(--primary)]">Acompanhamento de Sinistros</h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
                 Oferecemos suporte contínuo, auxiliando os clientes a navegar pelo processo de reclamação e garantindo que recebem o que lhes é devido.
               </p>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
                 Nossa equipe especializada está preparada para orientar em todas as etapas, desde a notificação do sinistro até a conclusão do processo.
               </p>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
                 Para acompanhar seu sinistro, entre em contato conosco através de nossos canais de atendimento e informe seu número de protocolo.
               </p>
               <motion.a 
@@ -155,51 +139,51 @@ export default function SuportePage() {
             </motion.div>
             
             <motion.div 
-              className="bg-white rounded-xl shadow-md p-8"
+              className="bg-white dark:bg-gray-700 rounded-xl shadow-md p-8"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              <h3 className="text-xl font-bold mb-4" style={{color: '#003366'}}>Etapas do Processo de Sinistro</h3>
+              <h3 className="text-xl font-bold mb-4 text-[var(--primary)]">Etapas do Processo de Sinistro</h3>
               <div className="space-y-4">
                 <div className="flex items-start">
-                  <div className="bg-blue-100 text-[var(--primary)] w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                  <div className="bg-[var(--icon-bg-color)] text-[var(--primary)] w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
                     <span className="font-bold">1</span>
                   </div>
                   <div>
-                    <h4 className="font-bold">Notificação do Sinistro</h4>
-                    <p className="text-gray-600 text-sm">Comunique o sinistro o mais rápido possível através de nossos canais</p>
+                    <h4 className="font-bold text-gray-900 dark:text-gray-100">Notificação do Sinistro</h4>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">Comunique o sinistro o mais rápido possível através de nossos canais</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="bg-blue-100 text-[var(--primary)] w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                  <div className="bg-[var(--icon-bg-color)] text-[var(--primary)] w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
                     <span className="font-bold">2</span>
                   </div>
                   <div>
-                    <h4 className="font-bold">Documentação</h4>
-                    <p className="text-gray-600 text-sm">Apresente os documentos necessários para análise do sinistro</p>
+                    <h4 className="font-bold text-gray-900 dark:text-gray-100">Documentação</h4>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">Apresente os documentos necessários para análise do sinistro</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="bg-blue-100 text-[var(--primary)] w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                  <div className="bg-[var(--icon-bg-color)] text-[var(--primary)] w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
                     <span className="font-bold">3</span>
                   </div>
                   <div>
-                    <h4 className="font-bold">Análise e Vistoria</h4>
-                    <p className="text-gray-600 text-sm">Nossa equipe e a seguradora analisarão o caso e realizarão vistorias se necessário</p>
+                    <h4 className="font-bold text-gray-900 dark:text-gray-100">Análise e Vistoria</h4>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">Nossa equipe e a seguradora analisarão o caso e realizarão vistorias se necessário</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="bg-blue-100 text-[var(--primary)] w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                  <div className="bg-[var(--icon-bg-color)] text-[var(--primary)] w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
                     <span className="font-bold">4</span>
                   </div>
                   <div>
-                    <h4 className="font-bold">Conclusão e Pagamento</h4>
-                    <p className="text-gray-600 text-sm">Após aprovação, o pagamento será realizado conforme as condições do contrato</p>
+                    <h4 className="font-bold text-gray-900 dark:text-gray-100">Conclusão e Pagamento</h4>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">Após aprovação, o pagamento será realizado conforme as condições do contrato</p>
                   </div>
                 </div>
               </div>
@@ -209,7 +193,7 @@ export default function SuportePage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16">
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.div 
             className="text-center mb-12"
@@ -218,8 +202,8 @@ export default function SuportePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold mb-4" style={{color: '#003366'}}>Perguntas Frequentes</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold mb-4 text-[var(--primary)]">Perguntas Frequentes</h2>
+            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Encontre respostas para as dúvidas mais comuns sobre seguros e nossos serviços
             </p>
           </motion.div>
@@ -234,72 +218,56 @@ export default function SuportePage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <div className="bg-white rounded-xl shadow-md overflow-hidden">
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
                   <div 
                     className="p-6 cursor-pointer flex items-center justify-between"
                     onClick={() => toggleFaq(index)}
                   >
-                    <h3 className="text-lg font-bold flex items-center">
-                      <HelpCircle className="text-[var(--primary)] mr-3" />
-                      {faq.question}
+                    <h3 className="text-lg font-bold flex items-center text-gray-900 dark:text-gray-100">
+                      <HelpCircle className="text-[var(--primary)] mr-3 flex-shrink-0" />
+                      <span>{faq.question}</span>
                     </h3>
                     <motion.div 
-                      className="text-gray-400"
+                      className="text-gray-500 dark:text-gray-400"
                       animate={{ rotate: activeFaq === index ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <svg 
-                        className="w-5 h-5" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        viewBox="0 0 24 24" 
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                      </svg>
+                      <ChevronDown className="w-5 h-5" />
                     </motion.div>
                   </div>
-                  {activeFaq === index && (
-                    <motion.div 
-                      className="px-6 pb-6 pt-2 border-t border-gray-100"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <p className="text-gray-600">{faq.answer}</p>
-                    </motion.div>
-                  )}
+                  <AnimatePresence>
+                    {activeFaq === index && (
+                      <motion.div 
+                        className="px-6 pb-6 pt-2 border-t border-gray-200 dark:border-gray-700"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      >
+                        <p className="text-gray-600 dark:text-gray-300 pt-4">{faq.answer}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </motion.div>
             ))}
           </div>
           
-          <motion.div 
-            className="text-center mt-12"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-          >
-            <p className="text-gray-600 mb-4">Não encontrou o que procura?</p>
-            <motion.a 
-              href="/contato" 
-              className="bg-[var(--primary)] text-white font-bold py-3 px-8 rounded-full hover:bg-blue-800 transition-colors inline-block"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Entre em Contato
-            </motion.a>
-          </motion.div>
+          <CtaSection
+            title="Não encontrou o que procura?"
+            subtitle="Entre em contato conosco para obter ajuda personalizada."
+            buttonText="Entre em Contato"
+            buttonLink="/contato"
+            variant="light"
+          />
         </div>
       </section>
 
       {/* Recursos Úteis */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-6">
           <motion.h2 
-            className="text-3xl font-bold text-center mb-12"
-            style={{color: '#003366'}}
+            className="text-3xl font-bold text-center mb-12 text-[var(--primary)]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -310,51 +278,51 @@ export default function SuportePage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <motion.div 
-              className="bg-white rounded-xl shadow-md p-8 card-hover"
+              className="bg-white dark:bg-gray-700 rounded-xl shadow-md p-8 card-hover"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <div className="icon-bg mb-4">
-                <FileText size={24} />
+                <FileText size={24} className="text-[var(--primary)]" />
               </div>
-              <h3 className="text-xl font-bold mb-2">Formulários</h3>
-              <p className="text-gray-600 mb-4">Acesse formulários para aviso de sinistro, alteração de dados e outras solicitações</p>
+              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">Formulários</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">Acesse formulários para aviso de sinistro, alteração de dados e outras solicitações</p>
               <a href="/recursos/formularios" className="text-[var(--primary)] font-medium hover:underline flex items-center">
                 Acessar Formulários <span className="ml-1">&rarr;</span>
               </a>
             </motion.div>
             
             <motion.div 
-              className="bg-white rounded-xl shadow-md p-8 card-hover"
+              className="bg-white dark:bg-gray-700 rounded-xl shadow-md p-8 card-hover"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <div className="icon-bg mb-4">
-                <Headphones size={24} />
+                <Headphones size={24} className="text-[var(--primary)]" />
               </div>
-              <h3 className="text-xl font-bold mb-2">Tutoriais</h3>
-              <p className="text-gray-600 mb-4">Vídeos e guias passo a passo para ajudar você a utilizar nossos serviços</p>
+              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">Tutoriais</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">Vídeos e guias passo a passo para ajudar você a utilizar nossos serviços</p>
               <a href="/recursos/tutoriais" className="text-[var(--primary)] font-medium hover:underline flex items-center">
                 Ver Tutoriais <span className="ml-1">&rarr;</span>
               </a>
             </motion.div>
             
             <motion.div 
-              className="bg-white rounded-xl shadow-md p-8 card-hover"
+              className="bg-white dark:bg-gray-700 rounded-xl shadow-md p-8 card-hover"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <div className="icon-bg mb-4">
-                <HelpCircle size={24} />
+                <HelpCircle size={24} className="text-[var(--primary)]" />
               </div>
-              <h3 className="text-xl font-bold mb-2">Glossário</h3>
-              <p className="text-gray-600 mb-4">Entenda os termos técnicos mais comuns do universo dos seguros</p>
+              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">Glossário</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">Entenda os termos técnicos mais comuns do universo dos seguros</p>
               <a href="/recursos/glossario" className="text-[var(--primary)] font-medium hover:underline flex items-center">
                 Consultar Glossário <span className="ml-1">&rarr;</span>
               </a>

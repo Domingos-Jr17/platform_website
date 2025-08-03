@@ -33,7 +33,7 @@ export default function PartnerLogos() {
       {partnerLogos.map((logo, index) => (
         <motion.div
           key={logo}
-          className="bg-white p-4 rounded-lg shadow-sm w-32 h-16 flex items-center justify-center relative"
+          className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm w-32 h-16 flex items-center justify-center relative"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}

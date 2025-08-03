@@ -1,8 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import PageHeader from '@/app/components/ui/PageHeader';
+import CtaSection from '@/app/components/sections/CtaSection';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 interface ServiceDetail {
   title: string;
@@ -184,51 +187,79 @@ const serviceData: { [key: string]: ServiceDetail } = {
   },
 };
 
+const FaqItem = ({ item, isOpen, onClick }: { item: { question: string; answer: string }, isOpen: boolean, onClick: () => void }) => (
+  <motion.div
+    className="mb-4"
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5 }}
+  >
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
+      <div
+        className="p-5 cursor-pointer flex items-center justify-between"
+        onClick={onClick}
+      >
+        <h3 className="text-lg font-bold flex items-center text-gray-900 dark:text-gray-100">
+          {item.question}
+        </h3>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <ChevronDown className="w-6 h-6 text-[var(--primary)]" />
+        </motion.div>
+      </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="px-5 pb-5 pt-0 border-t border-gray-100 dark:border-gray-700">
+              <p className="text-gray-600 dark:text-gray-300 pt-4">{item.answer}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  </motion.div>
+);
+
 export default function ServiceDetailPage() {
   const params = useParams();
   const serviceId = params.serviceId as string;
   const [service, setService] = useState<ServiceDetail | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
-    if (serviceId) {
+    if (serviceId && serviceData[serviceId]) {
       setService(serviceData[serviceId]);
+    } else {
+      setService(null);
     }
   }, [serviceId]);
 
   if (!service) {
     return (
-      <div className="pt-24 flex items-center justify-center h-screen">
-        <p className="text-xl text-gray-600">Serviço não encontrado.</p>
+      <div className="pt-24 flex items-center justify-center min-h-screen">
+        <p className="text-xl text-gray-600 dark:text-gray-300">Serviço não encontrado.</p>
       </div>
     );
   }
 
   return (
     <div className="pt-24">
-      {/* Hero Section */}
-      <section className="bg-[var(--primary)] text-white py-16">
-        <div className="container mx-auto px-6 text-center">
-          <motion.h1 
-            className="text-4xl font-bold mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            {service.title}
-          </motion.h1>
-          <motion.p 
-            className="text-xl max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {service.description}
-          </motion.p>
-        </div>
-      </section>
+      <PageHeader
+        title={service.title}
+        subtitle={service.description}
+      />
 
       {/* Detalhes do Serviço */}
-      <section className="py-16">
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <motion.div
@@ -237,27 +268,27 @@ export default function ServiceDetailPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <h2 className="text-3xl font-bold mb-6" style={{color: '#003366'}}>Sobre o {service.title}</h2>
-              <p className="text-gray-600 mb-4">
+              <h2 className="text-3xl font-bold mb-6 text-[var(--primary)]">Sobre o {service.title}</h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
                 {service.fullDescription}
               </p>
-              
-              <h3 className="text-2xl font-bold mb-4 mt-8" style={{color: '#003366'}}>Benefícios</h3>
-              <ul className="list-disc list-inside text-gray-600 space-y-2">
+
+              <h3 className="text-2xl font-bold mb-4 mt-8 text-[var(--primary)]">Benefícios</h3>
+              <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
                 {service.benefits.map((benefit, index) => (
                   <li key={index}>{benefit}</li>
                 ))}
               </ul>
             </motion.div>
-            <motion.div 
-              className="bg-gray-100 rounded-xl p-8"
+            <motion.div
+              className="bg-gray-100 dark:bg-gray-800 rounded-xl p-8"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              <h3 className="text-2xl font-bold mb-4" style={{color: '#003366'}}>Como Contratar</h3>
-              <ol className="list-decimal list-inside text-gray-600 space-y-2">
+              <h3 className="text-2xl font-bold mb-4 text-[var(--primary)]">Como Contratar</h3>
+              <ol className="list-decimal list-inside text-gray-600 dark:text-gray-300 space-y-2">
                 {service.howToContract.map((step, index) => (
                   <li key={index}>{step}</li>
                 ))}
@@ -273,83 +304,38 @@ export default function ServiceDetailPage() {
       </section>
 
       {/* FAQ do Serviço */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-6">
-          <motion.div 
+          <motion.div
             className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold mb-4" style={{color: '#003366'}}>Perguntas Frequentes sobre {service.title}</h2>
+            <h2 className="text-3xl font-bold mb-4 text-[var(--primary)]">Perguntas Frequentes sobre {service.title}</h2>
           </motion.div>
-          
+
           <div className="max-w-3xl mx-auto">
             {service.faq.map((item, index) => (
-              <motion.div 
-                key={index} 
-                className="mb-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <div className="bg-white rounded-xl shadow-md overflow-hidden">
-                  <div 
-                    className="p-5 cursor-pointer flex items-center justify-between"
-                    onClick={() => { /* Implementar toggle FAQ */ }}
-                  >
-                    <h3 className="text-lg font-bold flex items-center">
-                      {item.question}
-                    </h3>
-                    {/* Ícone de expansão */}
-                  </div>
-                  <div className="px-5 pb-5 pt-0 border-t border-gray-100">
-                    <p className="text-gray-600">{item.answer}</p>
-                  </div>
-                </div>
-              </motion.div>
+              <FaqItem
+                key={index}
+                item={item}
+                isOpen={openFaq === index}
+                onClick={() => setOpenFaq(openFaq === index ? null : index)}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Final */}
-      <section className="py-16 bg-[var(--primary)] text-white">
-        <div className="container mx-auto px-6 text-center">
-          <motion.h2 
-            className="text-3xl font-bold mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Proteja o que mais importa com {service.title}
-          </motion.h2>
-          <motion.p 
-            className="text-xl max-w-2xl mx-auto mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Entre em contato hoje mesmo e descubra as melhores soluções de seguros para você e sua família
-          </motion.p>
-          <motion.a 
-            href="/contato#orcamento" 
-            className="btn-primary inline-block py-3 px-8 font-bold text-white"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Solicite uma Cotação
-          </motion.a>
-        </div>
-      </section>
+      <CtaSection
+        title={`Proteja o que mais importa com ${service.title}`}
+        subtitle="Entre em contato hoje mesmo e descubra as melhores soluções de seguros para você e sua família"
+        buttonText="Solicite uma Cotação"
+        buttonLink="/contato#orcamento"
+        variant="primary"
+      />
     </div>
   );
 }

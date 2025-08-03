@@ -30,7 +30,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-  <!-- TODO: Adicionar URLs para todas as páginas de serviço detalhadas e outras páginas importantes -->
+  <!-- NOTE: Adicionar URLs para todas as páginas de serviço detalhadas e outras páginas importantes é uma tarefa para o desenvolvedor. -->
   <!-- Exemplo:
   <url>
     <loc>https://www.yourwebsite.com/servicos/seguro-vida</loc>

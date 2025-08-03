@@ -44,7 +44,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-MZ" className={`${montserrat.variable} ${openSans.variable}`}>
-      <body className="font-sans bg-white text-gray-800">
+      {/* Preconecte a origens externas críticas */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      
+      {/* Se usar Google Analytics */}
+      <link rel="preconnect" href="https://www.google-analytics.com" />
+      
+      {/* Se usar imagens de CDN externo */}
+      <link rel="preconnect" href="https://cdn.example.com" />
+      
+      {/* Pré-carregue recursos críticos */}
+      <link rel="preload" href="/fonts/inter-bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+      <link rel="preload" href="/images/hero-bg-optimized.jpg" as="image" />
+      <body className="font-sans bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
         <ThemeProvider>    
         <Header />
         <main>{children}</main>
