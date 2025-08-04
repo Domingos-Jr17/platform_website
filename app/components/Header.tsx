@@ -12,14 +12,14 @@ export default function Header() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <header className="fixed w-full bg-white dark:bg-gray-800 shadow-md z-50">
+    <header className="fixed w-full bg-white dark:bg-gray-900 shadow-md z-50">
       <div className="container mx-auto px-6 py-3 flex justify-between items-center">
         <div className="flex items-center">
           <Link href="/" className="flex items-center group">
-            <div className="dark:hidden">
+            <div className="dark:block">
               <Image src="/logo_platform_black.png" alt="Platform Logo" width={64} height={26} />
             </div>
-            <div className="hidden dark:block">
+            <div className="hidden dark:hidden">
               <Image src="/logo_platform-light.png" alt="Platform Logo" width={64} height={26} />
             </div>
             <span className="ml-2 text-xl font-bold text-gray-800 dark:text-white transition-colors group-hover:text-[var(--primary)]">
